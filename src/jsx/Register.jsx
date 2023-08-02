@@ -134,7 +134,7 @@ export const Register = (props) => {
                   type="text"
                   name="firstName"
                   value={firstName}
-                  placeholder="Enter Your First Name"
+                  placeholder="Votre nom"
                   onChange={(e) => setFirstName(e.target.value)}
                 />
                 <input
