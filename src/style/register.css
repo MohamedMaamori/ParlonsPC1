@@ -1,0 +1,132 @@
+.content-wrapper {
+  padding-top: 80px; /* Adjust the value as needed to create space for the navbar */
+}
+
+.reg-container {
+  margin: 0;
+  height: 100vh;
+  background: rgb(13, 8, 106);
+  background: linear-gradient(
+    11deg,
+    rgba(13, 8, 106, 1) 0%,
+    rgba(14, 26, 110, 0.9920343137254902) 24%,
+    rgba(29, 80, 191, 1) 51%,
+    rgba(31, 79, 192, 1) 66%,
+    rgba(0, 86, 173, 1) 70%,
+    rgba(33, 79, 193, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.reg-box {
+  /* margin-top: 120px; */
+  height: 70%;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  background-color: white;
+  margin-bottom: 2%;
+}
+.reg-welcome {
+  height: 30%;
+  align-self: center;
+}
+.reg-welcome > img {
+  height: 100%;
+  width: 100%;
+}
+.reg-welcome-text {
+  align-self: center;
+  text-align: center;
+}
+.reg-input-container {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.reg-input-secondpage .reg-input-firstdpage .reg-input-thirdpage {
+  padding: 20px; /* Add spacing between carousel slides */
+}
+
+.reg-input-thirdpage {
+  display: flex;
+  flex-direction: column;
+}
+.reg-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#reg-confpass-label,
+#reg-pass-label {
+  transition: all 0.1s ease-in-out;
+  color: #2c2c54;
+  position: absolute;
+  top: 30%;
+  left: 18px;
+  transform: scale(0.95);
+  opacity: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.reg-input-base {
+  border-radius: 10px;
+}
+
+#reg-confpass-input:focus ~ label#reg-confpass-label,
+#reg-confpass-input:not(:placeholder-shown) ~ #reg-confpass-label {
+  top: -20% !important;
+  left: 2px !important;
+  transform: scale(0.8);
+  background: white;
+  color: black;
+  padding: 0 6px;
+  opacity: 1;
+}
+
+#reg-confpass-input,
+#reg-pass-input {
+  transition: outline 0.2s ease;
+  font-size: 1rem;
+  /* outline-color: var(--button-text); */
+  outline: unset;
+  border: 1px solid #bbbbbb;
+  padding: 17px 10px 10px 17px;
+  width: 100%;
+  max-width: 500px;
+}
+
+#reg-confpass-input:focus,
+#reg-pass-input:focus {
+  border: 2px solid blue;
+}
+
+.relative {
+  position: relative;
+  align-self: center;
+  margin-bottom: 2%;
+}
+#reg-pass-input:focus ~ label#reg-pass-label,
+#reg-pass-input:not(:placeholder-shown) ~ #reg-pass-label {
+  top: -20% !important;
+  left: 2px !important;
+  transform: scale(0.8);
+  background: white;
+  color: black;
+  padding: 0 6px;
+  opacity: 1;
+}
+.password-toggle-icon {
+  color: blue;
+  font-size: larger;
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  z-index: 1000;
+  cursor: pointer;
+}
