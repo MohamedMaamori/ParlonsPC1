@@ -1,0 +1,103 @@
+.content-wrapper {
+  padding-top: 80px; /* Adjust the value as needed to create space for the navbar */
+}
+
+.login_nav {
+  /* margin-top: 0; */
+  background-color: rgb(255, 255, 255);
+  height: 10%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.login_nav > a {
+  height: 100%;
+}
+#nav_img {
+  height: 100%;
+}
+.nav_btn {
+  height: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  /* justify-content: space-around; */
+}
+.nav_btn > button {
+  height: 50%;
+  background-color: white;
+  border: 0;
+  cursor: pointer;
+  margin-right: 3%;
+  font-size: large;
+}
+.nav_btn > button:hover {
+  color: gray;
+  text-decoration: underline;
+}
+.nav_btn > button > a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Hiddden BOx for login password */
+
+/* FOOTER */
+.login_footer {
+  background: rgb(6, 5, 18);
+  background: linear-gradient(
+    100deg,
+    0 rgba(6, 5, 18, 1) 0%,
+    rgba(0, 0, 1, 0.9920343137254902) 4%,
+    rgba(9, 23, 57, 1) 31%,
+    rgba(12, 33, 78, 1) 100%,
+    rgba(6, 19, 50, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  margin: 0;
+}
+.login_footer > p {
+  margin: 0;
+  color: white;
+}
+
+/* Center the popup content vertically and horizontally */
+#password {
+  width: 94%;
+  height: 25px;
+  font-size: x-large;
+  margin-top: 2%;
+  border: 1px solid rgb(218, 214, 214);
+  border-radius: 5px;
+  padding-left: 5%;
+}
+.popup-btns {
+  display: flex;
+  flex-direction: column;
+}
+.login-btn {
+  margin-top: 5%;
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+}
+.back-btn {
+  background-color: white;
+  border: none;
+  font-size: large;
+  cursor: pointer;
+  padding: 0;
+  width: fit-content;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 10px;
+}

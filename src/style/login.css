@@ -1,0 +1,213 @@
+.container_login {
+  margin: 0;
+  height: 100vh;
+  background: rgb(13, 8, 106);
+  background: linear-gradient(
+    11deg,
+    rgba(13, 8, 106, 1) 0%,
+    rgba(14, 26, 110, 0.9920343137254902) 24%,
+    rgba(29, 80, 191, 1) 51%,
+    rgba(31, 79, 192, 1) 66%,
+    rgba(0, 86, 173, 1) 70%,
+    rgba(33, 79, 193, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login_box {
+  /* margin-top: 120px; */
+  height: 65%;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  background-color: white;
+  margin-bottom: 2%;
+}
+.login_box > form {
+  display: flex;
+  flex-direction: column;
+}
+.welcome_login {
+  height: 30%;
+  align-self: center;
+}
+.welcome_login > img {
+  height: 100%;
+  width: 100%;
+}
+.welcome_text_login {
+  text-align: center;
+}
+.welcome_text_login > h2 {
+  margin: 0;
+  align-self: center;
+  font-size: xx-large;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.welcome_text_login > p {
+  margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: small;
+}
+.login_form {
+  width: 50%;
+
+  margin-top: 4%;
+  /* outline: blue dotted; */
+  height: 30%;
+  align-items: center;
+  align-self: center;
+}
+.login_form > input {
+  width: 90%;
+  height: 20%;
+  font-size: larger;
+  margin-top: 2%;
+  border: 1px solid rgb(218, 214, 214);
+  border-radius: 5px;
+  padding-left: 5%;
+}
+.login_form > button {
+  text-decoration: none;
+  background-color: rgb(26, 10, 245);
+  border: 0;
+  color: white;
+  width: 30%;
+  height: 20%;
+  font-size: large;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10%;
+}
+.login_form > button:hover {
+  color: blue;
+  background-color: white;
+  transition: 300ms ease-in-out;
+}
+.below_input {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.below_input > span {
+  width: 100%;
+}
+.below_input > a {
+  width: 100%;
+  text-align: end;
+  padding-right: 4%;
+  text-decoration: none;
+  color: black;
+}
+.below_input > a:hover {
+  color: rgb(138, 138, 138);
+  text-decoration: underline;
+}
+
+.login_form_bottom {
+  width: 100%;
+  text-align: center;
+
+  /* outline: red dotted; */
+}
+.login_form_bottom > p {
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(37, 37, 37);
+}
+.signInWith {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* outline: brown dotted; */
+}
+.signInWith > a {
+  width: 5%;
+  height: 110%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  background-color: blue;
+  margin: 0 6%;
+}
+.signInWith > a:nth-child(2) {
+  margin-right: 6%;
+  margin-left: 6%;
+}
+.signInWith > a > svg {
+  height: 50%;
+  color: white;
+}
+.signInWith > a:nth-child(2) > svg {
+  height: 50%;
+}
+.signInWith > a:hover {
+  background-color: white;
+  transition: 300ms ease-in-out;
+}
+
+.signInWith > a:hover > svg {
+  color: blue;
+  transition: 300ms ease-in-out;
+}
+
+#email-label {
+  transition: all 0.1s ease-in-out;
+  color: #2c2c54;
+  position: absolute;
+  top: 30%;
+  left: 18px;
+  transform: scale(0.95);
+  opacity: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.input-base {
+  border-radius: 10px;
+}
+
+#email-input:focus ~ label#email-label,
+#email-input:not(:placeholder-shown) ~ #email-label {
+  top: -20% !important;
+  left: 2px !important;
+  transform: scale(0.8);
+  background: white;
+  color: black;
+  padding: 0 6px;
+  opacity: 1;
+}
+
+#email-input {
+  transition: outline 0.2s ease;
+  font-size: 1rem;
+  /* outline-color: var(--button-text); */
+  outline: unset;
+  border: 1px solid #bbbbbb;
+  padding: 17px 10px 10px 17px;
+  width: 400px;
+}
+
+#email-input:focus {
+  border: 2px solid blue;
+}
+
+.relative {
+  position: relative;
+  align-self: center;
+  margin-bottom: 2%;
+  margin-top: 4%;
+}
