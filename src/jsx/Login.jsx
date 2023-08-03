@@ -14,6 +14,7 @@ export const Login = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const inputEmailRef = useRef(null);
   const navigate = useNavigate();
+  console.log("authentiocated", props.authenticated);
   if (props.authenticated) {
     navigate("/");
   }

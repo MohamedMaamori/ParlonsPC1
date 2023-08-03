@@ -27,24 +27,45 @@ function checkEmailExists($email)
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
+
     // If the email exists, fetch and store the user data in the session
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         $_SESSION['user_username'] = $user['user_username'];
         // You can also store other user data in the session if needed
         // For example: $_SESSION['user_name'] = $user['user_name'];
+        return true;
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM admins WHERE admin_email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // If the email exists in admins table, return admin data in the session
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            $stmt = $conn->prepare("SELECT * FROM technicians WHERE technician_email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return true;
+            }
+            ;
+        }
     }
 
     // Close the connection
     $stmt->close();
     $conn->close();
 
-    // Return true if the email exists, otherwise false
-    return $result->num_rows > 0;
+    // Return false if the email does not exist in users or admins table
+    return false;
 }
 
 // Check if the form has been submitted
-if (($_SERVER["REQUEST_METHOD"] === "POST") || ($_SERVER["REQUEST_METHOD"] === "GET")) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" || $_SERVER["REQUEST_METHOD"] === "GET") {
     // Get the form data
     $data = json_decode(file_get_contents('php://input'), true);
 
@@ -55,6 +76,11 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") || ($_SERVER["REQUEST_METHOD"] === "
         if (checkEmailExists($email)) {
             // Email exists, return success response for email validation
             $response = array("exists" => true, "message" => "Email exists in the database");
+            if (isset($_SESSION['user_username'])) {
+                $response["user"] = true;
+            } else {
+                $response["user"] = false;
+            }
             echo json_encode($response);
             exit;
         } else {
@@ -66,10 +92,6 @@ if (($_SERVER["REQUEST_METHOD"] === "POST") || ($_SERVER["REQUEST_METHOD"] === "
 
     }
 }
-;
-
-
-
-// If the request method is not POST, return error response
+// If the request method is not POST or email not found, return error response
 echo json_encode(array("error" => "Invalid request"));
 ?>

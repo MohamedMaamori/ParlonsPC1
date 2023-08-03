@@ -130,3 +130,39 @@
   z-index: 1000;
   cursor: pointer;
 }
+.reg-label {
+  transition: all 0.1s ease-in-out;
+  color: #2c2c54;
+  position: absolute;
+  top: 30%;
+  left: 18px;
+  transform: scale(0.95);
+  opacity: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.reg-input:focus ~ label.reg-label,
+.reg-input:not(:placeholder-shown) ~ .reg-label {
+  top: -20% !important;
+  left: 2px !important;
+  transform: scale(0.8);
+  background: white;
+  color: black;
+  padding: 0 6px;
+  opacity: 1;
+}
+
+.reg-input {
+  transition: outline 0.2s ease;
+  font-size: 1rem;
+  /* outline-color: var(--button-text); */
+  outline: unset;
+  border: 1px solid #bbbbbb;
+  padding: 17px 10px 10px 17px;
+  width: 400px;
+}
+
+.reg-input:focus {
+  border: 2px solid blue;
+}

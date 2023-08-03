@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./style/App.css";
 import "./Fontawesome";
 import { Login } from "./jsx/Login";
 import { Register } from "./jsx/Register";
 import { Home } from "./jsx/Homepage"; // Import the Home component
 import { Profile } from "./jsx/Profile"; // Import the Home component
+import { AdminDashboard } from "./jsx/AdminDashboard"; // Import the Home component
+import { TechnicianDashboard } from "./jsx/TechnicianDashboard"; // Import the Home component
+import Nav from "./hooks/navbar";
 import { Password } from "./jsx/Password"; // Import the Home component
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 
 function App() {
   const [password, setPassword] = useState(""); // State to hold the password
   const [email, setEmail] = useState(""); // State to hold the password
-  const [authenticated, setAuthenticated] = useState("");
-
+  const [authenticated, setAuthenticated] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [tech, setTech] = useState(false);
   const isAuthenticated = function () {
     axios({
       method: "GET",
@@ -22,8 +26,14 @@ function App() {
     })
       .then((response) => {
         if (response.data.authenticated) {
+          console.log(response.data.message);
           // Check for "authenticated" => true directly in response data
           setAuthenticated(true);
+          if (response.data.message === "admin") {
+            setAdmin(true);
+          } else if (response.data.message === "technician") {
+            setTech(true);
+          }
         }
       })
       .catch((error) => {
@@ -40,70 +50,10 @@ function App() {
     console.log(email);
     // Optionally, you can perform other logic related to login, if needed.
   };
-  const logOut = function () {
-    // Clear local storage (if needed)
-    localStorage.clear();
-
-    // Make the logout API request (if needed)
-    axios({
-      method: "GET",
-      url: "http://localhost/php/myapp/php/logout.php",
-      withCredentials: true,
-    })
-      .then((response) => {
-        alert("You have been logged out");
-        // Redirect the user to the login page after successful logout
-        window.location.href = "/login";
-      })
-      .catch((error) => {
-        console.error("Logout error:", error);
-      });
-  };
-  function nav() {
-    isAuthenticated();
-    if (authenticated) {
-      return (
-        <>
-          <nav className="login_nav">
-            <Link to="/">
-              <img id="nav_img" src="LOGOparlonNoBackground.png" alt="" />
-            </Link>
-
-            <div className="nav_btn">
-              <button>Pricing</button>
-              <button>Pricing</button>
-              <button>
-                <Link to="/Profile">Profile</Link>
-              </button>
-              <button onClick={logOut}>logout</button>
-            </div>
-          </nav>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <nav className="login_nav">
-            <Link to="/">
-              <img id="nav_img" src="LOGOparlonNoBackground.png" alt="" />
-            </Link>
-
-            <div className="nav_btn">
-              <button>Pricing</button>
-              <button>Pricing</button>
-              <button>
-                <Link to="/login">Sign In</Link>
-              </button>
-            </div>
-          </nav>
-        </>
-      );
-    }
-  }
 
   return (
     <>
-      {nav()}
+      <Nav authenticated={authenticated} admin={admin} tech={tech} />
       <div className="content-wrapper">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -116,11 +66,26 @@ function App() {
           <Route path="/Profile" element={<Profile />} />
           <Route
             path="/Password"
-            element={<Password onLogin={handlePass} navFunction={nav} />}
+            element={
+              <Password
+                onLogin={handlePass}
+                isAuthenticated={isAuthenticated}
+              />
+            }
+          />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route
+            path="/TechnicianDashboard"
+            element={<TechnicianDashboard />}
           />
           <Route
             path="/Register"
-            element={<Register onLogin={handlePass} navFunction={nav} />}
+            element={
+              <Register
+                onLogin={handlePass}
+                isAuthenticated={isAuthenticated}
+              />
+            }
           />
         </Routes>
       </div>

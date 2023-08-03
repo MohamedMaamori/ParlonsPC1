@@ -42,12 +42,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $user = $result->fetch_assoc();
             $_SESSION['user_id'] = $user['user_id'];
         }
+        if ($result->num_rows == 0) {
+            $stmt = $conn->prepare("SELECT * FROM admins WHERE admin_email = ? AND admin_pass = ?");
+            $stmt->bind_param("ss", $email, $password);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $admin = $result->fetch_assoc();
+                $_SESSION['admin_id'] = $admin['admin_id'];
+                echo json_encode(array("valid" => $result->num_rows > 0, "message" => "admin"));
+                exit;
+            } else {
+                $stmt = $conn->prepare("SELECT * FROM technicians WHERE technician_email = ? AND technician_pass = ?");
+                $stmt->bind_param("ss", $email, $password);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    $admin = $result->fetch_assoc();
+                    $_SESSION['technician_id'] = $admin['technician_id'];
+                    echo json_encode(array("valid" => $result->num_rows > 0, "message" => "technician"));
+                    exit;
+                }
+
+            }
+        }
 
         // Close the connection
         $stmt->close();
         $conn->close();
+
         // Return true if the email and password are valid, otherwise false
-        echo json_encode(array("valid" => $result->num_rows > 0, "message" => "This Password Exists: " . $_SESSION['user_id']));
+
+        echo json_encode(array("valid" => $result->num_rows > 0, "message" => "user"));
         exit;
     }
 }

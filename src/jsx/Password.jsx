@@ -36,12 +36,26 @@ export const Password = (props) => {
             console.log(response.data.message);
 
             props.onLogin(password);
-            props.navFunction();
-            navigate(
-              `/?email=${encodeURIComponent(
-                emailFromLogin
-              )}&password=${encodeURIComponent(password)}`
-            ); // Replace "/home" with your desired route
+            props.isAuthenticated();
+            if (response.data.message === "admin") {
+              navigate(
+                `/AdminDashboard?email=${encodeURIComponent(
+                  emailFromLogin
+                )}&password=${encodeURIComponent(password)}`
+              ); // Replace "/home" with your desired route
+            } else if (response.data.message === "technician") {
+              navigate(
+                `/TechnicianDashboard?email=${encodeURIComponent(
+                  emailFromLogin
+                )}&password=${encodeURIComponent(password)}`
+              );
+            } else {
+              navigate(
+                `/profile?email=${encodeURIComponent(
+                  emailFromLogin
+                )}&password=${encodeURIComponent(password)}`
+              ); // Replace "/home" with your desired route
+            }
           } else {
             // Incorrect password
             setErrorMessage("Incorrect Password");

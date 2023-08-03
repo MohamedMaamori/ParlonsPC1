@@ -27,7 +27,7 @@ export const Register = (props) => {
   const [stage, setStage] = useState(1);
 
   const handleNext = () => {
-    if (stage < 3) {
+    if (stage < 2) {
       setStage((prevStage) => prevStage + 1);
     } else {
       handleSubmit();
@@ -96,7 +96,7 @@ export const Register = (props) => {
         .then((response) => {
           console.log("Response:", response);
           props.onLogin(password);
-          props.navFunction();
+          props.isAuthenticated();
           navigate("/");
         })
         .catch((error) => {
@@ -122,82 +122,54 @@ export const Register = (props) => {
           <div className="reg-welcome">
             <img src="LOGOparlonNoBackground.png" alt="" />
           </div>
-          <div className="reg-welcome-text">
-            <h2>Bonjour !</h2>
-            <p>Connectez-vous pour découvrir toutes nos fonctionnalités</p>
-          </div>
+
           <div className="reg-input-container">
-            <h5>{emailFromLogin}</h5>
+            <h3>{emailFromLogin}</h3>
             {stage === 1 && (
               <div className="reg-input-firstpage">
-                <input
-                  type="text"
-                  name="firstName"
-                  value={firstName}
-                  placeholder="Votre nom"
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={lastName}
-                  placeholder="Enter your Last Name"
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                <input
-                  type="text"
-                  name="userName"
-                  value={userName}
-                  placeholder="Enter Your Username"
-                  onChange={(e) => setUserName(e.target.value)}
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder=""
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="input-cal input-base reg-input"
+                  />
+
+                  <label className="reg-label">Prenom</label>
+                </div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={lastName}
+                    placeholder=""
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="input-cal input-base reg-input"
+                  />
+                  <label className="reg-label">Nom</label>
+                </div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    name="userName"
+                    value={userName}
+                    placeholder=""
+                    onChange={(e) => setUserName(e.target.value)}
+                    className="input-cal input-base reg-input"
+                  />
+                  <label className="reg-label">Surnom</label>
+                </div>
+
                 <button type="button" onClick={handleNext}>
                   Next
                 </button>
               </div>
             )}
-            {/* Second Page */}
+
+            {/* Second page*/}
             {stage === 2 && (
-              <div className="reg-input-secondpage">
-                <label htmlFor="">select your gender</label>
-                <select
-                  name="gender"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                >
-                  <option value="">Select</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-                <label htmlFor="">Select Your Country</label>
-                <select
-                  name="country"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                >
-                  <option value="">Select</option>
-                  <option value="USA">France</option>
-                  <option value="Georgia">Georgia</option>
-                  <option value="Tunisia">Tunisi</option>
-                  <option value="India">India</option>
-                  {/* Add more options for different countries */}
-                </select>
-                <DatePicker
-                  selected={birthDate}
-                  dateFormat="dd/MM/yyyy"
-                  onChange={(date) => setBirthDate(date)}
-                />
-                <button type="button" onClick={handlePrevious}>
-                  Previous
-                </button>
-                <button type="button" onClick={handleNext}>
-                  Next
-                </button>
-              </div>
-            )}
-            {/* Third page*/}
-            {stage === 3 && (
               <div className="reg-input-thirdpage">
                 <div className="relative">
                   <input
