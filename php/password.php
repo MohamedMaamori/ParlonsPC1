@@ -32,15 +32,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Prepare and execute a SQL query to check if the email and password match
-        $stmt = $conn->prepare("SELECT * FROM users WHERE user_email = ? AND user_pass = ?");
-        $stmt->bind_param("ss", $email, $password);
+        $stmt = $conn->prepare("SELECT * FROM users WHERE user_email = ? ");
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
         // If the email exists, fetch and store the user data in the session
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            $_SESSION['user_id'] = $user['user_id'];
+            $hashedPassword = $user['user_pass'];
+            if (password_verify($password, $hashedPassword)) {
+                $_SESSION['user_id'] = $user['user_id'];
+                echo json_encode(array("valid" => $result->num_rows > 0, "message" => "user"));
+            }
         }
         if ($result->num_rows == 0) {
             $stmt = $conn->prepare("SELECT * FROM admins WHERE admin_email = ? AND admin_pass = ?");
@@ -73,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Return true if the email and password are valid, otherwise false
 
-        echo json_encode(array("valid" => $result->num_rows > 0, "message" => "user"));
         exit;
     }
 }

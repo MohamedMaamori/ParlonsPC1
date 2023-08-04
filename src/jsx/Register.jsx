@@ -9,12 +9,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import usePasswordToggle from "../hooks/usePasswordToggle.js";
 export const Register = (props) => {
   const [PasswordInputType, ToggleIcon] = usePasswordToggle();
+  const [ConfPasswordInputType, ConfToggleIcon] = usePasswordToggle();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
-  const [gender, setGender] = useState("");
-  const [country, setCountry] = useState("");
-  const [birthDate, setBirthDate] = useState(new Date());
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -43,36 +41,17 @@ export const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Email: ${email}`);
-
     console.log(`firstname: ${firstName}`);
     console.log(`lastname:${lastName}`);
     console.log(`username:${userName}`);
-    console.log(`gender:${gender}`);
-    console.log(`country:${country}`);
-    console.log(`birthdate:${birthDate}`);
     console.log(`password:${password}`);
 
     // Validate the form data before submitting
     if (
-      (email.trim() &&
-        firstName.trim() &&
-        lastName.trim() &&
-        gender.trim() &&
-        country.trim() &&
-        birthDate &&
-        password.trim() &&
-        confPassword.trim() &&
-        password === confPassword) ||
-      (email.trim() &&
-        firstName.trim() &&
-        lastName.trim() &&
-        userName.trim() &&
-        gender.trim() &&
-        country.trim() &&
-        birthDate &&
-        password.trim() &&
-        confPassword.trim() &&
-        password === confPassword) // Check if password and confirm password match
+      email.trim() &&
+      password.trim() &&
+      confPassword.trim() &&
+      password === confPassword
     ) {
       // Prepare the form data to be sent to the server
       const formData = {
@@ -80,9 +59,6 @@ export const Register = (props) => {
         firstName,
         lastName,
         userName,
-        gender,
-        country,
-        birthDate: birthDate.toISOString().split("T")[0], // Convert date to a string in the format "YYYY-MM-DD"
         password,
       };
       // Send the registration request to the server using Axios
@@ -187,7 +163,7 @@ export const Register = (props) => {
                 </div>
                 <div className="relative">
                   <input
-                    type={PasswordInputType}
+                    type={ConfPasswordInputType}
                     name="confPassword"
                     placeholder=""
                     value={confPassword}
@@ -197,17 +173,8 @@ export const Register = (props) => {
                     className="input-cal reg-input-base"
                   />
                   <label id="reg-confpass-label">Confirm Password</label>
-                  <span className="password-toggle-icon">{ToggleIcon}</span>
+                  <span className="password-toggle-icon">{ConfToggleIcon}</span>
                 </div>
-                {/* <div class="relative">
-                  <input
-                    type="text"
-                    placeholder=""
-                    id="input"
-                    className="input-cal reg-input-base"
-                  />
-                  <label id="label-input">Name</label>
-                </div> */}
                 <div className="reg-btns">
                   <button type="button" onClick={handlePrevious}>
                     Previous

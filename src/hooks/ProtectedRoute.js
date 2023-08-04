@@ -12,3 +12,5 @@ const ProtectedRoute = ({ authenticated, redirectTo, ...props }) => {
 };
 
 export default ProtectedRoute;
+
+// To be Done
