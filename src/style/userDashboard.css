@@ -1,0 +1,61 @@
+.header {
+  min-width: 1fr;
+  min-height: 100px;
+  background-color: rgb(84, 181, 214);
+  padding: 10px;
+  margin-top: 0;
+  justify-content: center;
+}
+
+.h1 {
+  font-size: 50px;
+  color: white;
+  text-align: center;
+}
+
+.grid_cont {
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.grid_cont > div > p {
+  text-align: center;
+}
+/* .sidebar {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    min-height: 100%;
+    justify-content: space-between;
+    padding-top: 100px;
+} */
+
+.sidebar {
+  width: 150px;
+  padding: 30px;
+  box-shadow: 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* List items in the sidebar */
+.sidebar ul {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  margin-bottom: 20px;
+  font-size: 20px;
+  align-items: start;
+}
+
+/* Styling the first "ACCOUNT" item */
+.sidebar li:first-child {
+  font-size: 25px;
+  font-weight: bold;
+}

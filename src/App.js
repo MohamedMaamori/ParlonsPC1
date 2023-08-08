@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style/App.css";
 import "./Fontawesome";
 import { Login } from "./jsx/Login";
 import { Register } from "./jsx/Register";
 import { Home } from "./jsx/Homepage"; // Import the Home component
-import { Profile } from "./jsx/Profile"; // Import the Home component
+import { UserDashboard } from "./jsx/UserDashboard"; // Import the Home component
 import { AdminDashboard } from "./jsx/AdminDashboard"; // Import the Home component
 import { TechnicianDashboard } from "./jsx/TechnicianDashboard"; // Import the Home component
-import Nav from "./hooks/navbar";
+import Nav from "./components/navbar";
 import { Password } from "./jsx/Password"; // Import the Home component
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
@@ -40,6 +40,10 @@ function App() {
         console.error("Error:", error);
       });
   };
+
+  useEffect(() => {
+    isAuthenticated();
+  }, [password, email]);
   const handlePass = (enteredPassword) => {
     setPassword(enteredPassword);
     console.log(password);
@@ -60,10 +64,12 @@ function App() {
           <Route
             path="/Login"
             element={
-              <Login onLogin={handleEmail} authenticated={authenticated} />
+              <Login onLogin={handleEmail} isAuthenticated={isAuthenticated} />
             }
           />
-          <Route path="/Profile" element={<Profile />} />
+
+          <Route path="/UserDashboard" element={<UserDashboard />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
           <Route
             path="/Password"
             element={

@@ -46,10 +46,21 @@
 .reg-input-container {
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .reg-input-secondpage .reg-input-firstdpage .reg-input-thirdpage {
   padding: 20px; /* Add spacing between carousel slides */
+  width: 100%;
+  text-align: -webkit-center;
+}
+.center {
+  width: 430px;
+}
+.next-btn {
+  float: right;
 }
 
 .reg-input-thirdpage {

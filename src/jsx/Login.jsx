@@ -1,24 +1,24 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookF,
-  faGoogle,
-  faApple,
-} from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faApple } from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../style/login.css";
-
+import GoogleLoginButton from "../components/google";
 export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const inputEmailRef = useRef(null);
   const navigate = useNavigate();
-  console.log("authentiocated", props.authenticated);
-  if (props.authenticated) {
-    navigate("/");
-  }
 
+  const handleGoogleLogin = (googleEmail) => {
+    setEmail(googleEmail); // Update the email state
+  };
+
+  // console.log("authentiocated", props.authenticated);
+  // if (props.authenticated) {
+  //   navigate("/");
+  // }
   // Handle submit button
   const handleSubmit = function (e) {
     e.preventDefault();
@@ -96,12 +96,13 @@ export const Login = (props) => {
           <div className="login_form_bottom">
             <p>OU</p>
             <div className="signInWith">
-              <a href="/Login">
+              <a href="">
                 <FontAwesomeIcon icon={faFacebookF} />
               </a>
-              <a href="/Login">
-                <FontAwesomeIcon icon={faGoogle} />
-              </a>
+              <GoogleLoginButton
+                onGoogleLogin={handleGoogleLogin}
+                isAuthenticated={props.isAuthenticated}
+              />
               <a href="/Login">
                 <FontAwesomeIcon icon={faApple} />
               </a>

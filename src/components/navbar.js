@@ -1,36 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+// Navbar TO be Fixed
 function Nav({ authenticated, admin, tech }) {
   const [isAdmin, setAdmin] = useState(false);
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [isTech, setTech] = useState(false);
   useEffect(() => {
-    checkIsAuthenticated();
+    setAdmin(admin);
+    setAuthenticated(authenticated);
+    setTech(tech);
   }, [authenticated, admin, tech]);
-
-  const checkIsAuthenticated = function () {
-    axios({
-      method: "GET",
-      url: "http://localhost/php/myapp/php/check_session.php",
-      withCredentials: true,
-    })
-      .then((response) => {
-        if (response.data.authenticated) {
-          console.log(response.data.message);
-          setAuthenticated(true);
-          if (response.data.message === "admin") {
-            setAdmin(true);
-          } else if (response.data.message === "technician") {
-            setTech(true);
-          }
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
 
   const handleLogout = function () {
     localStorage.clear();
@@ -91,7 +71,7 @@ function Nav({ authenticated, admin, tech }) {
             <button>Help</button>
             <button>Pricing</button>
             <button>
-              <Link to="/profile">Profile</Link>
+              <Link to="/UserDashboard">Profile</Link>
             </button>
             <button onClick={handleLogout}>logout</button>
           </div>

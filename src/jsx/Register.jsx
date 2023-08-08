@@ -4,7 +4,6 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "../style/register.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import usePasswordToggle from "../hooks/usePasswordToggle.js";
 export const Register = (props) => {
@@ -20,7 +19,7 @@ export const Register = (props) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const emailFromLogin = queryParams.get("email") || "";
-  const [email, setEmail] = useState(emailFromLogin);
+  const email = emailFromLogin;
 
   const [stage, setStage] = useState(1);
 
@@ -40,11 +39,11 @@ export const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Email: ${email}`);
-    console.log(`firstname: ${firstName}`);
-    console.log(`lastname:${lastName}`);
-    console.log(`username:${userName}`);
-    console.log(`password:${password}`);
+    // console.log(`Email: ${email}`);
+    // console.log(`firstname: ${firstName}`);
+    // console.log(`lastname:${lastName}`);
+    // console.log(`username:${userName}`);
+    // console.log(`password:${password}`);
 
     // Validate the form data before submitting
     if (
@@ -103,42 +102,44 @@ export const Register = (props) => {
             <h3>{emailFromLogin}</h3>
             {stage === 1 && (
               <div className="reg-input-firstpage">
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder=""
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="input-cal input-base reg-input"
-                  />
+                <div className="center">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder=""
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      className="input-cal input-base reg-input"
+                    />
 
-                  <label className="reg-label">Prenom</label>
-                </div>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={lastName}
-                    placeholder=""
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="input-cal input-base reg-input"
-                  />
-                  <label className="reg-label">Nom</label>
-                </div>
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="userName"
-                    value={userName}
-                    placeholder=""
-                    onChange={(e) => setUserName(e.target.value)}
-                    className="input-cal input-base reg-input"
-                  />
-                  <label className="reg-label">Surnom</label>
+                    <label className="reg-label">Prenom</label>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={lastName}
+                      placeholder=""
+                      onChange={(e) => setLastName(e.target.value)}
+                      className="input-cal input-base reg-input"
+                    />
+                    <label className="reg-label">Nom</label>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="userName"
+                      value={userName}
+                      placeholder=""
+                      onChange={(e) => setUserName(e.target.value)}
+                      className="input-cal input-base reg-input"
+                    />
+                    <label className="reg-label">Surnom</label>
+                  </div>
                 </div>
 
-                <button type="button" onClick={handleNext}>
+                <button className="next-btn" type="button" onClick={handleNext}>
                   Next
                 </button>
               </div>
