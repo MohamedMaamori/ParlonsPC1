@@ -14,17 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Check if email and password exist for password validation
     if (isset($data["email"]) && isset($data["password"])) {
-        $email = $data["email"];
+        $email = $_SESSION["email"];
         $password = $data["password"];
 
         // Database connection details
-        $servername = "localhost";
-        $username = "root";
-        $dbpassword = ""; // Note: Changed variable name to avoid conflict with $password
-        $dbname = "parlonspc";
-
-        // Create a new connection
-        $conn = new mysqli($servername, $username, $dbpassword, $dbname);
+        require_once("conn.php");
 
         // Check connection
         if ($conn->connect_error) {
@@ -42,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $user = $result->fetch_assoc();
             $hashedPassword = $user['user_pass'];
             if (password_verify($password, $hashedPassword)) {
-                $_SESSION['user_id'] = $user['user_id'];
                 echo json_encode(array("valid" => $result->num_rows > 0, "message" => "user"));
             }
         }
@@ -53,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $admin = $result->fetch_assoc();
-                $_SESSION['admin_id'] = $admin['admin_id'];
                 echo json_encode(array("valid" => $result->num_rows > 0, "message" => "admin"));
                 exit;
             } else {
@@ -63,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $result = $stmt->get_result();
                 if ($result->num_rows > 0) {
                     $admin = $result->fetch_assoc();
-                    $_SESSION['technician_id'] = $admin['technician_id'];
                     echo json_encode(array("valid" => $result->num_rows > 0, "message" => "technician"));
                     exit;
                 }

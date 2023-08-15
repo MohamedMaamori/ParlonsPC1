@@ -25,6 +25,31 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>ParlonsPC</title>
+
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "2535665849942387", // Replace with your actual App ID
+          cookie: true,
+          xfbml: true,
+          version: "v17.0", // Replace with your desired API version
+        });
+
+        FB.AppEvents.logPageView();
+      };
+
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
+    </script>
   </head>
   <body>
     <div id="root"></div>

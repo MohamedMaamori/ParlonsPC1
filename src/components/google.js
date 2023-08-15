@@ -9,12 +9,11 @@ const GoogleLoginButton = ({ onGoogleLogin, isAuthenticated }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const onSuccess = (data) => {
-    setIsLoading(true);
     const email = data.email;
     const firstName = data.given_name;
     const lastName = data.family_name;
     const userName = data.name;
-    const password = data.sub;
+    const googleID = data.sub;
 
     axios({
       method: "post",
@@ -24,18 +23,17 @@ const GoogleLoginButton = ({ onGoogleLogin, isAuthenticated }) => {
         firstName,
         lastName,
         userName,
-        password,
+        googleID,
       },
       withCredentials: true,
     })
       .then((response) => {
+        setIsLoading(true);
         if (response.data.success) {
-          isAuthenticated();
-
-          console.log(response);
+          console.log(response.data.message);
           setTimeout(() => {
+            isAuthenticated();
             setIsLoading(false);
-            console.log(response);
             navigate("/UserDashboard");
             window.location.reload();
           }, 3000);
@@ -73,7 +71,7 @@ const GoogleLoginButton = ({ onGoogleLogin, isAuthenticated }) => {
             console.log(err);
           }}
         >
-          <button>
+          <button className="signInWith-btns">
             <FontAwesomeIcon icon={faGoogle} />
           </button>
         </LoginSocialGoogle>

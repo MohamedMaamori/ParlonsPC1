@@ -18,7 +18,6 @@ export const Password = (props) => {
 
   const handleSubmit = function (e) {
     e.preventDefault();
-    setIsLoading(true);
     console.log(password, emailFromLogin);
     if (password.trim()) {
       // Send the password validation request to the authentication.php script
@@ -33,6 +32,7 @@ export const Password = (props) => {
       })
         .then((response) => {
           if (response.data.valid) {
+            setIsLoading(true);
             // Password is correct, navigate to Home page or desired page
             console.log(response.data.message);
 
@@ -91,100 +91,53 @@ export const Password = (props) => {
   }, [isLoading]);
   return (
     <>
-      {isLoading ? (
-        <div className="container_login">
+      {isLoading && (
+        <div className="overlay">
           <Loader />
-          <div className="login_box">
-            <button className="back-btn" onClick={handleBackButtonClick}>
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </button>
-            <div className="welcome_login">
-              <img src="LOGOparlonNoBackground.png" alt="" />
-            </div>
-            <div className="welcome_text_login">
-              <h2>Bonjour !</h2>
-              <p>Connectez-vous pour découvrir toutes nos fonctionnalités</p>
-            </div>
-            <form className="login_form">
-              <div className="relative">
-                <input
-                  type={PasswordInputType}
-                  name="password"
-                  placeholder=""
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  required="required"
-                  id="pass-input"
-                  className="input-cal input-base"
-                />
-
-                <label id="pass-label">Password</label>
-                <span className="password-toggle-icon">{ToggleIcon}</span>
-              </div>
-              <div className="below_input">
-                <input type="checkbox" name="rememberMe" id="" />
-                <span>Rappelez-vous de moi</span>
-                <a href="/App.js"> Mot de passe oublié</a>
-              </div>
-
-              {errorMessage && <p className="error_message">{errorMessage}</p>}
-              <button
-                className="login-btn"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Log In
-              </button>
-            </form>
-          </div>
-        </div>
-      ) : (
-        <div className="container_login">
-          <div className="login_box">
-            <button className="back-btn" onClick={handleBackButtonClick}>
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </button>
-            <div className="welcome_login">
-              <img src="LOGOparlonNoBackground.png" alt="" />
-            </div>
-            <div className="welcome_text_login">
-              <h2>Bonjour !</h2>
-              <p>Connectez-vous pour découvrir toutes nos fonctionnalités</p>
-            </div>
-            <form className="login_form">
-              <div className="relative">
-                <input
-                  type={PasswordInputType}
-                  name="password"
-                  placeholder=""
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  required="required"
-                  id="pass-input"
-                  className="input-cal input-base"
-                />
-
-                <label id="pass-label">Password</label>
-                <span className="password-toggle-icon">{ToggleIcon}</span>
-              </div>
-              <div className="below_input">
-                <input type="checkbox" name="rememberMe" id="" />
-                <span>Rappelez-vous de moi</span>
-                <a href="/App.js"> Mot de passe oublié</a>
-              </div>
-
-              {errorMessage && <p className="error_message">{errorMessage}</p>}
-              <button
-                className="login-btn"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Log In
-              </button>
-            </form>
-          </div>
         </div>
       )}
+
+      <div className="container_login">
+        <div className="login_box">
+          <button className="back-btn" onClick={handleBackButtonClick}>
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          <div className="welcome_login">
+            <img src="LOGOparlonNoBackground.png" alt="" />
+          </div>
+          <div className="welcome_text_login">
+            <h2>Bonjour !</h2>
+            <p>Connectez-vous pour découvrir toutes nos fonctionnalités</p>
+          </div>
+          <form className="login_form">
+            <div className="relative">
+              <input
+                type={PasswordInputType}
+                name="password"
+                placeholder=""
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required="required"
+                id="pass-input"
+                className="input-cal input-base"
+              />
+
+              <label id="pass-label">Password</label>
+              <span className="password-toggle-icon">{ToggleIcon}</span>
+            </div>
+            <div className="below_input">
+              <input type="checkbox" name="rememberMe" id="" />
+              <span>Rappelez-vous de moi</span>
+              <a href="/ForgotPassword"> Mot de passe oublié</a>
+            </div>
+
+            {errorMessage && <p className="error_message">{errorMessage}</p>}
+            <button className="login-btn" type="submit" onClick={handleSubmit}>
+              Log In
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 };

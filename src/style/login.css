@@ -132,9 +132,9 @@
   justify-content: center;
   /* outline: brown dotted; */
 }
-.signInWith > a {
+.signInWith > div {
   width: 5%;
-  height: 110%;
+  height: 200%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,26 +142,23 @@
   border-radius: 50%;
   background-color: blue;
   margin: 0 6%;
+  cursor: pointer;
 }
-.signInWith > a:nth-child(2) {
-  margin-right: 6%;
-  margin-left: 6%;
-}
-.signInWith > a > svg {
-  height: 50%;
-  color: white;
-}
-.signInWith > a:nth-child(2) > svg {
-  height: 50%;
-}
-.signInWith > a:hover {
-  background-color: white;
-  transition: 300ms ease-in-out;
+.signInWith-btns {
+  color: #ffffff;
+  background: none;
+  border: none;
+  font-size: x-large;
+  cursor: pointer;
 }
 
-.signInWith > a:hover > svg {
-  color: blue;
+.signInWith > div:hover {
+  background-color: rgb(255, 255, 255);
   transition: 300ms ease-in-out;
+}
+.signInWith > div:hover .signInWith-btns {
+  color: blue;
+  transition: 300ms ease-in-out; /* Change the button's color when the div is hovered */
 }
 
 #email-label {

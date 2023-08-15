@@ -5,6 +5,31 @@ import Sidebar from "../components/sidebar";
 import "../style/userDashboard.css";
 
 export const UserDashboard = (props) => {
+  const [userName, setUserName] = useState("");
+
+  // Function to fetch the user ID from the server
+  const fetchUserName = () => {
+    axios({
+      method: "GET",
+      url: "http://localhost/php/myapp/php/get_userinfo.php",
+      withCredentials: true,
+    })
+      .then((response) => {
+        if (response.data.user_username) {
+          setUserName(response.data.user_username);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle other errors here
+      });
+  };
+
+  // Fetch the user ID when the component mounts
+  useEffect(() => {
+    fetchUserName();
+  }, []);
+  console.log(userName);
   return (
     <>
       <div>
@@ -14,7 +39,7 @@ export const UserDashboard = (props) => {
         <div className="grid_cont">
           <Sidebar />
           <div>
-            <p>Hello user(not user? log out)</p>
+            <h1>Hello {userName} </h1>
             <p>from your account you can manage your items</p>
             <Grid />
           </div>

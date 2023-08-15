@@ -5,6 +5,12 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 header("Access-Control-Allow-Credentials: true");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require './PHPMailer-master/src/Exception.php';
+require './PHPMailer-master/src/PHPMailer.php';
+require './PHPMailer-master/src/SMTP.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header('Access-Control-Allow-Origin: http://localhost:3000');
@@ -26,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lastName = $formData['lastName'];
     $userName = $formData['userName'];
     $password = $formData['password'];
-    // Validate the form data (you can add more validation as needed)
+
     if (empty($email) || empty($password)) {
         http_response_code(400);
         echo json_encode(array('error' => 'All fields are required'));
@@ -37,13 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
 
     // Replace the following with your actual database credentials
-    $dbHost = 'localhost';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'parlonspc';
-
-    // Connect to the database
-    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+    require_once("conn.php");
 
     // Check the connection
     if ($conn->connect_error) {
@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['user_username'] = $user['user_username'];
         }
     } else {
         // Error occurred while inserting the user

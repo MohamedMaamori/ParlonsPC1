@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../style/login.css";
 import GoogleLoginButton from "../components/google";
+import FacebookLoginButton from "../components/facebook";
 export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const inputEmailRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleGoogleLogin = (googleEmail) => {
-    setEmail(googleEmail); // Update the email state
+  const handleSocialLogin = (socialEmail) => {
+    setEmail(socialEmail); // Update the email state
   };
 
   // console.log("authentiocated", props.authenticated);
@@ -96,16 +97,19 @@ export const Login = (props) => {
           <div className="login_form_bottom">
             <p>OU</p>
             <div className="signInWith">
-              <a href="">
-                <FontAwesomeIcon icon={faFacebookF} />
-              </a>
-              <GoogleLoginButton
-                onGoogleLogin={handleGoogleLogin}
+              <FacebookLoginButton
+                onFacebookLogin={handleSocialLogin}
                 isAuthenticated={props.isAuthenticated}
               />
-              <a href="/Login">
-                <FontAwesomeIcon icon={faApple} />
-              </a>
+              <GoogleLoginButton
+                onGoogleLogin={handleSocialLogin}
+                isAuthenticated={props.isAuthenticated}
+              />
+              <div>
+                <button className="signInWith-btns">
+                  <FontAwesomeIcon icon={faApple} />
+                </button>
+              </div>
             </div>
           </div>
         </div>

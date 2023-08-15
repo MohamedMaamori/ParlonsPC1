@@ -1,3 +1,4 @@
+/* global FB */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -21,6 +22,7 @@ function Nav({ authenticated, admin, tech }) {
       withCredentials: true,
     })
       .then((response) => {
+        FB.logout();
         alert("You have been logged out");
         window.location.href = "/login";
       })

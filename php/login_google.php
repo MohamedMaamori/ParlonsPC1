@@ -24,26 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = trim($data['firstName']);
     $lastName = trim($data['lastName']);
     $userName = trim($data['userName']);
-    $password = trim($data['password']);
+    $googleID = trim($data['googleID']); // Password is user googleID
 
     // Validate the form data (you can add more validation as needed)
-    if (empty($email) || empty($password)) {
+    if (empty($email)) {
         http_response_code(400);
         echo json_encode(array('error' => 'All fields are required'));
         exit;
     }
 
-    // Hash the password for security using PASSWORD_ARGON2ID (or PASSWORD_BCRYPT)
-    $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
+
 
     // Replace the following with your actual database credentials
-    $dbHost = 'localhost';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'parlonspc';
-
-    // Connect to the database
-    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+    require_once("conn.php");
 
     // Check the connection
     if ($conn->connect_error) {
@@ -60,13 +53,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
+        if (empty($user['social_google_id'])) {
+            $update_google_id = $conn->prepare('UPDATE `users` SET `social_google_id` = ? WHERE user_email = ?');
+            $update_google_id->bind_param('ss', $googleID, $email);
+            $update_google_id->execute();
+            $update_google_id->close();
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['user_username'] = $user['user_username'];
+            echo json_encode(array("success" => true, "usersid" => $user['user_id'], "message" => "Linking"));
+            exit;
+        }
         $_SESSION['user_id'] = $user['user_id'];
-        echo json_encode(["success" => true, "usersid" => $user['user_id']]);
+        $_SESSION['user_username'] = $user['user_username'];
+        echo json_encode(array("success" => true, "usersid" => $user['user_id'], "message" => "Linked"));
         exit;
     } else {
         $date = date('Y-m-d H:i:s');
-        $insert = $conn->prepare('INSERT INTO users (user_email, user_firstname, user_lastname, user_username, user_pass, user_creation_date) VALUES (?, ?, ?, ?, ?, ?)');
-        $insert->bind_param('ssssss', $email, $firstName, $lastName, $userName, $hashedPassword, $date);
+        $insert = $conn->prepare('INSERT INTO users (user_email, user_firstname, user_lastname, user_username, user_creation_date,social_google_id ) VALUES (?, ?, ?, ?, ?, ?)');
+        $insert->bind_param('ssssss', $email, $firstName, $lastName, $userName, $date, $googleID);
 
         if ($insert->execute()) {
             // User registration successful
@@ -82,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result->num_rows > 0) {
                 $user = $result->fetch_assoc();
                 $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['user_username'] = $user['user_username'];
             }
         } else {
             http_response_code(500);

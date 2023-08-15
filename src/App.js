@@ -7,6 +7,8 @@ import { Home } from "./jsx/Homepage"; // Import the Home component
 import { UserDashboard } from "./jsx/UserDashboard"; // Import the Home component
 import { AdminDashboard } from "./jsx/AdminDashboard"; // Import the Home component
 import { TechnicianDashboard } from "./jsx/TechnicianDashboard"; // Import the Home component
+import { ForgotPassword } from "./jsx/ForgotPassword"; // Import the Home component
+import Verify from "./jsx/Verify";
 import Nav from "./components/navbar";
 import { Password } from "./jsx/Password"; // Import the Home component
 import { Route, Routes } from "react-router-dom";
@@ -61,6 +63,7 @@ function App() {
       <div className="content-wrapper">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Verify" element={<Verify />} />
           <Route
             path="/Login"
             element={
@@ -70,6 +73,7 @@ function App() {
 
           <Route path="/UserDashboard" element={<UserDashboard />} />
           <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route
             path="/Password"
             element={
