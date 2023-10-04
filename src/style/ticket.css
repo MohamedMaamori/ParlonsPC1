@@ -1,0 +1,99 @@
+/* Style pour le conteneur principal */
+.container {
+  display: flex;
+  justify-content: space-between; /* Les disposer à gauche et à droite */
+  align-items: flex-start; /* Aligner les formulaires en haut */
+  height: auto;
+}
+
+/* Style pour le formulaire de sélection de services */
+.service-form {
+  float: left; /* Mettre le formulaire à gauche */
+  width: calc(50% - 10px); /* 50% moins la marge */
+  margin-right: 10px; /* Ajouter une marge à droite pour l'espace entre les formulaires */
+  padding: 20px; /* Ajouter de l'espace autour du formulaire */
+  border: 1px solid #ccc; /* Ajouter une bordure autour du formulaire */
+}
+
+/* Style pour le formulaire de création de ticket */
+.ticket-form {
+  float: right; /* Mettre le formulaire à droite */
+  width: calc(50% - 10px); /* 50% moins la marge */
+  margin-left: 10px; /* Ajouter une marge à gauche pour l'espace entre les formulaires */
+  padding: 20px; /* Ajouter de l'espace autour du formulaire */
+  border: 1px solid #ccc; /* Ajouter une bordure autour du formulaire */
+}
+
+/* Style pour le message de succès */
+.success-message {
+  text-align: center;
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Style pour le titre */
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Style pour le formulaire */
+input[type="text"],
+textarea {
+  width: 100%; /* Ajustez la largeur du texte selon vos besoins */
+  padding: 8px; /* Ajustez la taille du texte selon vos besoins */
+  margin-bottom: 10px;
+}
+
+/* Style pour le champ de fichier */
+input[type="file"] {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+/* Style pour le bouton */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Style pour la liste des tickets (vous pouvez personnaliser selon vos besoins) */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Style pour le sélecteur de priorité */
+select {
+  width: 100%; /* Ajustez la largeur du texte selon vos besoins */
+  padding: 8px; /* Ajustez la taille du texte selon vos besoins */
+  margin-bottom: 10px;
+}
+
+/* Style pour les options sélectionnées */
+.selected {
+  background-color: #28a745; /* Couleur verte pour les options sélectionnées */
+  color: #fff; /* Texte blanc pour les options sélectionnées */
+}
+/* Style pour les options sélectionnées */
+select option:checked {
+  background-color: #28a745; /* Couleur verte pour les options sélectionnées */
+  color: #fff; /* Texte blanc pour les options sélectionnées */
+}
+

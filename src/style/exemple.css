@@ -1,0 +1,109 @@
+ /* Style pour le conteneur principal 
+ .container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh; /* Hauteur équivalente à la hauteur de la fenêtre */
+
+  */
+
+  /* Style pour le formulaire */
+  form {
+    text-align: left; /* Réinitialiser le texte au centre */
+    width: 150px; /* Largeur du formulaire (ajustez selon vos besoins) */
+    margin: 0 auto; /* Centrer horizontalement */
+  }
+  
+  /* Style pour le message de succès */
+  .success-message {
+    text-align: center;
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  /* Style pour le titre */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour le formulaire */
+  input[type="text"],
+  textarea {
+    width: 80%;
+    padding: 8px; /* Ajustez la taille du texte selon vos besoins */
+    margin-bottom: 10px;
+  }
+  
+  /* Style pour le champ de fichier */
+  input[type="file"] {
+    display: block; /* Le rend en tant que bloc pour le centrer */
+    margin: 0 auto; /* Centre horizontalement */
+    margin-bottom: 10px;
+  }
+  
+  /* Style pour le bouton */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style pour la liste des tickets (vous pouvez personnaliser selon vos besoins) */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style pour le sélecteur de priorité */
+  select {
+    width: 40%;
+    padding: 8px; /* Ajustez la taille du texte selon vos besoins */
+    margin-bottom: 10px;
+  }
+  /* Style pour le conteneur principal */
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Les disposer à gauche et à droite */
+    align-items: flex-start; /* Aligner les formulaires en haut */
+    height: auto;
+  }
+  
+  /* Style pour le formulaire de sélection de services */
+  .service-form {
+    flex-basis: 48%; /* Définir la largeur du formulaire (ajustez selon vos besoins) */
+    padding: 20px; /* Ajouter de l'espace autour du formulaire */
+    border: 1px solid #ccc; /* Ajouter une bordure autour du formulaire */
+  }
+  
+  /* Style pour le formulaire de création de ticket */
+  .ticket-form {
+    flex-basis: 48%; /* Définir la largeur du formulaire (ajustez selon vos besoins) */
+    padding: 20px; /* Ajouter de l'espace autour du formulaire */
+    border: 1px solid #ccc; /* Ajouter une bordure autour du formulaire */
+  }
+  
+  /* Ajoutez d'autres styles personnalisés selon vos besoins */
+  /* Style pour les options sélectionnées */
+  .selected {
+    background-color: #28a745; /* Couleur verte pour les options sélectionnées */
+    color: #fff; /* Texte blanc pour les options sélectionnées */
+  }
+  
